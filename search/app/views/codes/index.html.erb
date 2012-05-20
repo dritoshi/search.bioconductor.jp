@@ -1,0 +1,33 @@
+<%- model_class = Code.new.class -%>
+<style>                                                                                                  <%= Pygments.css('.highlight') %>                                                                        </style>                                                                                                         
+<%= form_tag codes_path, :method => :get do %>  
+  <p>  
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>  
+
+<p>
+<div class="row">
+Results:
+</div>
+
+<p>
+<% @codes.each_with_index do |code, id| %>
+  <div class="row">
+    <%= id %>: <%= link_to code.file, code_path(code) %> - <%= code.file_path %><br/>
+    <div class="span7 well">
+      Package: <%= link_to code.package, "http://bioconductor.jp/packages/2.11/bioc/html/#{code.package}.html" %>
+      Package: <%= code.package %> - 
+      Version: <%= code.version %> -
+      Language: <%= code.language %>
+    </div>
+  </div>
+
+  <% cache do %>
+    <%== Pygments.highlight(CGI.unescapeHTML(code.code)) %>
+  <% end %>
+
+<% end %>
+
+
+<%= will_paginate(@codes, :renderer => WillPaginate::ActionView::LinkRenderer) %>

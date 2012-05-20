@@ -1,0 +1,22 @@
+<%- model_class = @code.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human %></h1>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:package) %>:</strong></dt>
+  <dd><%= @code.package %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:version) %>:</strong></dt>
+  <dd><%= @code.version %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:file_path) %>:</strong></dt>
+  <dd><%= @code.file_path %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:file) %>:</strong></dt>
+  <dd><%= @code.file %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:language) %>:</strong></dt>
+  <dd><%= @code.language %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
+  <dd><%= @code.code %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              codes_path, :class => 'btn'  %>
+</div>
