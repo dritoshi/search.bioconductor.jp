@@ -13,17 +13,14 @@
   <dt><strong><%= model_class.human_attribute_name(:language) %>:</strong></dt>
   <dd><%= @code.language %></dd>
   <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
-  <dd><%= @code.code %></dd>
+  <dd>
+    <% cache do %>
+      <%== Pygments.highlight(CGI.unescapeHTML(code.code)) %>
+    <% end %>
+  </dd>
 </dl>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               codes_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_code_path(@code), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              code_path(@code),
-              :method => 'delete',
-              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-              :class => 'btn btn-danger' %>
 </div>

@@ -1,0 +1,21 @@
+## SQLite3
+desc "Load data to SQLite3 database on Rails"
+task :load do
+  ruby "load.rb"
+end
+
+## XML
+desc "From source code to xml for Apache Solr"
+task :xml do
+  ruby "./src2xml.rb"
+end
+
+desc "Make tar.bz2 file of xml dir"
+task :bz2 do
+  sh "tar jcvf xml.tar.bz2 xml"
+end
+
+desc "Post xml files to Apache Solr"
+task :post do
+  sh "java -jar post.jar xml/*.xml #{ENV['port']"
+end

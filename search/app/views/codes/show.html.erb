@@ -13,7 +13,11 @@
   <dt><strong><%= model_class.human_attribute_name(:language) %>:</strong></dt>
   <dd><%= @code.language %></dd>
   <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
-  <dd><%= @code.code %></dd>
+  <dd>
+    <% cache do %>
+      <%== Pygments.highlight(CGI.unescapeHTML(@code.code)) %>
+    <% end %>
+  </dd>
 </dl>
 
 <div class="form-actions">

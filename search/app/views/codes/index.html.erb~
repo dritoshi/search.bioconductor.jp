@@ -1,4 +1,7 @@
 <%- model_class = Code.new.class -%>
+<style>
+<%= Pygments.css('.highlight') %>
+</style>
 
 <%= form_tag codes_path, :method => :get do %>  
   <p>  
@@ -23,11 +26,10 @@ Results:
     </div>
   </div>
 
-   <%== CGI.unescapeHTML(Pygments.highlight(code.code)) %>
-<!--
   <% cache do %>
+    <%== Pygments.highlight(CGI.unescapeHTML(code.code)) %>
   <% end %>
--->
+
 <% end %>
 
 

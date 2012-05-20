@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="bioconductor" version="1.5">
+  <types>
+    <fieldType name="string" class="solr.StrField"/>
+    <fieldType name="text" class="solr.TextField">
+      <analyzer type="index">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="1"/>
+      </analyzer>
+    </fieldType>
+  </types>
+
+  <fields>
+    <field name="id"        type="string" indexed="true" stored="true" required="true"/>
+    <field name="package"   type="text"   indexed="true" stored="true" required="true"/>
+    <field name="version"   type="text"   indexed="true" stored="true" required="true"/>
+    <field name="file_path" type="text"   indexed="true" stored="true" required="true"/>
+    <field name="file"      type="text"   indexed="true" stored="true" required="true"/>
+    <field name="langage"   type="string" indexed="true" stored="true" required="true"/>
+    <field name="body"      type="text"   indexed="true" stored="true" required="true"/>
+
+    <field name="package_facet" type="string" indexed="true" stored="false" omitNorms="true"/>
+    <field name="langage_facet" type="string" indexed="true" stored="false" omitNorms="true"/>
+
+    <copyField source="package" dest="package_facet"/>
+    <copyField source="langage" dest="langage_facet"/>
+  </fields>  
+
+  <uniqueKey>id</uniqueKey>
+  <defaultSearchField>body</defaultSearchField>
+  <similarity class="org.apache.lucene.search.DefaultSimilarity"/>
+</schema>

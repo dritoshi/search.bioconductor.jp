@@ -20,7 +20,10 @@
 
   </head>
   <body>
-
+    <style>
+      <%= Pygments.css('.highlight') %>
+    </style>
+ 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -32,7 +35,8 @@
           <a class="brand" href="#">Bioconductor Code Search</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "About", "/about.html"  %></li>
+              <li><%= link_to "About", "https://github.com/dritoshi/search.bioconductor.jp/wiki"  %></li>
+              <li><%= link_to "Github", "https://github.com/dritoshi/search.bioconductor.jp"  %></li>
               <li><%= link_to "Bioconductor.org", "http://bioconductor.org/"  %></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -43,20 +47,9 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9">
+           <div class="span12">
               <%= yield %>
             </div>
-            <div class="span3">
-              <div class="well sidebar-nav">
-                <h3>Sidebar</h3>
-                <ul class="nav nav-list">
-                  <li class="nav-header">Sidebar</li>
-                  <li><%= link_to "Link1", "/path1"  %></li>
-                  <li><%= link_to "Link2", "/path2"  %></li>
-                  <li><%= link_to "Link3", "/path3"  %></li>
-                </ul>
-              </div><!--/.well -->
-            </div><!--/span-->
         </div><!--/row-->
       </div><!--/content-->
 
