@@ -1,5 +1,5 @@
 <%- model_class = @code.class -%>
-<h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<h1><%= @code.file %></h1>
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:package) %>:</strong></dt>
@@ -15,7 +15,7 @@
   <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
   <dd>
     <% cache do %>
-      <%== Pygments.highlight(CGI.unescapeHTML(code.code)) %>
+      <%== Pygments.highlight(CGI.unescapeHTML(@code.code)) %>
     <% end %>
   </dd>
 </dl>
