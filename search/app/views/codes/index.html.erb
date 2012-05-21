@@ -1,12 +1,17 @@
 <%- model_class = Code.new.class -%>
 
-<%= form_tag codes_path, :method => :get do %>  
-  <p>  
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", :name => nil %>
+<p>
+<%= form_tag codes_path, :method => :get do %>
+  <%= text_field_tag :query, params[:query],  {:class => "input-xlarge", :placeholder => "Type something…"} %>
+  <%= submit_tag "Search", :name => nil %>
 <% end %>  
 
-<p>
+<% if @codes == [] %>
+  <div class="row">
+  Results: 0
+ </div>
+<% else %>
+
 <div class="row">
 Results:
 </div>
@@ -27,5 +32,5 @@ Results:
   </div>
 <% end %>
 
-
 <%= will_paginate(@codes, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+<% end %>

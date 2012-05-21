@@ -2,20 +2,18 @@ class CodesController < ApplicationController
   # GET /codes
   # GET /codes.json
   def index
-    @search = Code.search do
-      fulltext params[:query] do
-        highlight :code
-      end
-    end
-    @codes = @search.results
-=begin
-    @codes = Code.paginate(:page => params[:page])
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @codes }
+    if params[:query] != ""
+      @search = Code.search do
+        fulltext params[:query] do
+          highlight :code
+        end
+      end
+      @codes = @search.results
+    else
+      @codes = []
     end
-=end
+    
   end
 
   # GET /codes/1
@@ -28,5 +26,6 @@ class CodesController < ApplicationController
       format.json { render json: @code }
     end
   end
+  
 
 end
