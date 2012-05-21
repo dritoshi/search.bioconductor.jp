@@ -2,7 +2,18 @@ class CodesController < ApplicationController
   # GET /codes
   # GET /codes.json
   def index
-
+    if params[:query] != ""
+      @search = Code.search do
+        fulltext params[:query] do
+          highlight :code
+        end
+        paginate :page => params[:page], :per_page => 30
+      end
+   else
+      @search = []
+    end
+    return @search
+=begin
     if params[:query] != ""
       @search = Code.search do
         fulltext params[:query] do
@@ -13,7 +24,7 @@ class CodesController < ApplicationController
     else
       @codes = []
     end
-    
+=end    
   end
 
   # GET /codes/1
@@ -26,6 +37,5 @@ class CodesController < ApplicationController
       format.json { render json: @code }
     end
   end
-  
 
 end

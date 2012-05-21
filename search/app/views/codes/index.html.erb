@@ -6,31 +6,34 @@
   <%= submit_tag "Search", :name => nil %>
 <% end %>  
 
-<% if @codes == [] %>
+<% if @search == [] %>
   <div class="row">
   Results: 0
  </div>
 <% else %>
 
 <div class="row">
-Results:
+Results: <%= @search.hits.total_entries %>
 </div>
 
 <p>
-<% @codes.each_with_index do |code, id| %>
-  <div class="row">
-    <h2><!--<%= id %>:  --><%= link_to code.file, code_path(code) %> - <%= code.file_path %><br/></h2>
-      Package: <%= link_to code.package, "http://bioconductor.jp/packages/2.11/bioc/html/#{code.package}.html" %> -
-      Version: <%= code.version %> -
-      Language: <%= code.language %>
-  </div>
-
-  <div class="row">
-    <% cache do %>
-      <%== Pygments.highlight(CGI.unescapeHTML(code.code)) %>
-    <% end %>
-  </div>
+<% @search.each_hit_with_result do |hit, code| %>
+  <% hit.highlights.each do |highlight| %>
+    <div class="row">
+      <h2>
+        <%= link_to code.file, code_path(code) %> - <%= code.file_path %><br/>
+      </h2>
+        Package: <%= link_to code.package, "http://bioconductor.jp/packages/2.11/bioc/html/#{code.package}.html" %> -
+        Version: <%= code.version %> -
+        Language: <%= code.language %>
+    </div>
+    <div class="row">
+      <% cache do %>
+        <%== Pygments.highlight(CGI.unescapeHTML(highlight.format {|word| word })) %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
-<%= will_paginate(@codes, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+<%= will_paginate(@search.hits, :renderer => WillPaginate::ActionView::LinkRenderer) %>
 <% end %>
