@@ -56,6 +56,5 @@ Results: <%= @search.hits.total_entries %>
   </div><!--/content-->
 </div>
 
-
-<%= will_paginate(@search.hits, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+<%= paginate @search.hits %>
 <% end %>
