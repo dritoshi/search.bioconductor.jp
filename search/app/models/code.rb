@@ -4,5 +4,6 @@ class Code < ActiveRecord::Base
   searchable do
     text :code, :stored => true
     text :file
+    string :package
   end
 end

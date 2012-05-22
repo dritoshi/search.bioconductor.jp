@@ -7,6 +7,7 @@ class CodesController < ApplicationController
         fulltext params[:query] do
           highlight :code
         end
+        facet :package
         paginate :page => params[:page], :per_page => 30
       end
    else

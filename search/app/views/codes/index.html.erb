@@ -6,6 +6,11 @@
   <%= submit_tag "Search", :name => nil %>
 <% end %>  
 
+<div class="container">
+  <div class="content">
+    <div class="row">
+       <div class="span9">
+
 <% if @search == [] %>
   <div class="row">
   Results: 0
@@ -20,9 +25,9 @@ Results: <%= @search.hits.total_entries %>
 <% @search.each_hit_with_result do |hit, code| %>
   <% hit.highlights.each do |highlight| %>
     <div class="row">
-      <h2>
+      <h3>
         <%= link_to code.file, code_path(code) %> - <%= code.file_path %><br/>
-      </h2>
+      </h3>
         Package: <%= link_to code.package, "http://bioconductor.jp/packages/2.11/bioc/html/#{code.package}.html" %> -
         Version: <%= code.version %> -
         Language: <%= code.language %>
@@ -34,6 +39,23 @@ Results: <%= @search.hits.total_entries %>
     </div>
   <% end %>
 <% end %>
+
+
+        </div>
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <h3>Packages</h3>
+            <ul class="nav nav-list">
+              <% @search.facet(:package).rows.each do |facet| %>
+                <li><%= link_to "#{facet.value} (#{facet.count})", "" %></li>
+              <% end %>
+            </ul>
+           </div><!--/.well -->
+        </div><!--/span-->
+    </div><!--/row-->
+  </div><!--/content-->
+</div>
+
 
 <%= will_paginate(@search.hits, :renderer => WillPaginate::ActionView::LinkRenderer) %>
 <% end %>
