@@ -34,4 +34,7 @@ Search::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # replace this with your tracker code
+  GA.tracker = "UA-31950383-1"
 end
