@@ -36,5 +36,5 @@ Search::Application.configure do
   config.assets.debug = true
   
   # replace this with your tracker code
-  GA.tracker = "UA-31950383-1"
+  GA.tracker = "UA-31950383-2"
 end
