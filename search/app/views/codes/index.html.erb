@@ -47,7 +47,7 @@ Results: <%= @search.hits.total_entries %>
             <h3>Packages</h3>
             <ul class="nav nav-list">
               <% @search.facet(:package).rows.each do |facet| %>
-                <li><%= link_to "#{facet.value} (#{facet.count})", "" %></li>
+                <li><%= link_to "#{facet.value} (#{facet.count})", url_for(:query => params[:query], :package => facet.value) %></li>
               <% end %>
             </ul>
            </div><!--/.well -->

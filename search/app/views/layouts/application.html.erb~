@@ -12,6 +12,7 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= analytics_init %>
 
     <link href="images/favicon.ico" rel="shortcut icon">
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
@@ -54,7 +55,7 @@
       </div><!--/content-->
 
       <footer>
-        <p>&copy; Itoshi NIKAIDO 2012</p>
+        <p>&copy; <%= link_to "Itoshi NIKAIDO", "http://hackingisbelieving.org" %>  2012</p>
       </footer>
 
     </div> <!-- /container -->
