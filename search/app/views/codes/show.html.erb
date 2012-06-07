@@ -27,7 +27,15 @@
 
 </div>                                                                                            
 <div class="span3">                                                                               
-
+<div class="well sidebar-nav">
+<h3>Links</h3>
+<ul>
+  <li><%= link_to "Offical Package Page", "http://bioconductor.jp/packages/2.11/bioc/html/#{@code.package}.html" %>
+  <li><%= link_to "Download stats", "http://bioconductor.org/packages/stats/bioc/#{@code.package}.html" %>
+  <li><%= link_to "Offical SVN", "https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks/#{@code.file_path}/"
+%>
+</ul>  
+</div>
 <div class="well sidebar-nav">                                                                  
   <h3>More Like This</h3>                                                                             
 <% package = nil %>

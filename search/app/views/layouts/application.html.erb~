@@ -55,7 +55,8 @@
       </div><!--/content-->
 
       <footer>
-        <p>&copy; <%= link_to "Itoshi NIKAIDO", "http://hackingisbelieving.org" %>  2012</p>
+        <p>Hosting provided by RIKEN Center for Developmental Biology
+        <p>&copy; <%= link_to "Itoshi NIKAIDO", "http://www.hackingisbelieving.org" %>  2012</p>
       </footer>
 
     </div> <!-- /container -->
