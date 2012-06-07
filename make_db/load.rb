@@ -44,7 +44,7 @@ Dir.glob("#{base_dir}/*.tar.gz")  do |tar_ball|
       :replace => '?').encode("UTF-8")
     code.gsub(/\t/, "  ")
     code.gsub!(/(?!\n)[[:cntrl:]]/,"")
-    code = CGI.escapeHTML(code)
+#    code = CGI.escapeHTML(code)
     
     # Load data to database
     db.execute("delete from codes where id = #{id}")

@@ -18,12 +18,11 @@
 <% else %>
 
 <div class="row">
-Results: <%= @search.hits.total_entries %>
+Results: <%= @search.results.total_entries %>
 </div>
 
 <p>
-<% @search.each_hit_with_result do |hit, code| %>
-  <% hit.highlights.each do |highlight| %>
+<% @search.results.each do |code| %>
     <div class="row">
       <h3>
         <%= link_to code.file, code_path(code) %> - <%= code.file_path %><br/>
@@ -34,7 +33,7 @@ Results: <%= @search.hits.total_entries %>
     </div>
     <div class="row">
       <% cache do %>
-        <%== Pygments.highlight(CGI.unescapeHTML(highlight.format {|word| word })) %>
+        <%== Pygments.highlight(CGI.unescapeHTML(code.code)) %>
       <% end %>
     </div>
   <% end %>
@@ -47,7 +46,7 @@ Results: <%= @search.hits.total_entries %>
             <h3>Packages</h3>
             <ul class="nav nav-list">
               <% @search.facet(:package).rows.each do |facet| %>
-                <li><%= link_to "#{facet.value} (#{facet.count})", "" %></li>
+                <li><%= link_to "#{facet.value} (#{facet.count})", url_for(:query => params[:query], :package => facet.value) %></li>
               <% end %>
             </ul>
            </div><!--/.well -->
@@ -56,7 +55,5 @@ Results: <%= @search.hits.total_entries %>
   </div><!--/content-->
 </div>
 
-
-<%= will_paginate(@search.hits, :renderer => WillPaginate::ActionView::LinkRenderer) %>
 <%= paginate @search.hits %>
 <% end %>

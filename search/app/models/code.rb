@@ -3,6 +3,7 @@ class Code < ActiveRecord::Base
 
   searchable do
     text :code, :stored => true
+#    text :code, :stored => false
     text :file
     string :package
   end
