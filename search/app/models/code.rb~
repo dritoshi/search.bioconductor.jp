@@ -2,7 +2,7 @@ class Code < ActiveRecord::Base
   attr_accessible :code, :file, :file_path, :language, :package, :version
 
   searchable do
-    string :code, :stored => true
+    text :code, :stored => true
 #    text :code, :stored => false
     text :file
     string :package

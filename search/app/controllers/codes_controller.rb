@@ -16,18 +16,6 @@ class CodesController < ApplicationController
       @search = []
     end
     return @search
-=begin
-    if params[:query] != ""
-      @search = Code.search do
-        fulltext params[:query] do
-          highlight :code
-        end
-      end
-      @codes = @search.results
-    else
-      @codes = []
-    end
-=end    
   end
 
   # GET /codes/1

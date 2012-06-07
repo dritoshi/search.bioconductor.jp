@@ -1,15 +1,20 @@
 <%- model_class = @code.class -%>
+
+
 <h1><%= @code.file %></h1>
+
+<div class="container">
+  <div class="content">
+  <div class="row">
+  <div class="span9"> 
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:package) %>:</strong></dt>
-  <dd><%= @code.package %></dd>
+  <dd><%= link_to @code.package, "http://bioconductor.jp/packages/2.11/bioc/html/#{@code.package}.html" %></dd>
   <dt><strong><%= model_class.human_attribute_name(:version) %>:</strong></dt>
   <dd><%= @code.version %></dd>
   <dt><strong><%= model_class.human_attribute_name(:file_path) %>:</strong></dt>
   <dd><%= @code.file_path %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:file) %>:</strong></dt>
-  <dd><%= @code.file %></dd>
   <dt><strong><%= model_class.human_attribute_name(:language) %>:</strong></dt>
   <dd><%= @code.language %></dd>
   <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
@@ -23,4 +28,33 @@
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               codes_path, :class => 'btn'  %>
+</div>
+
+</div>                                                                                            
+<div class="span3">                                                                               
+
+<div class="well sidebar-nav">                                                                  
+  <h3>More Like This</h3>                                                                             
+<% package = nil %>
+<% Sunspot.more_like_this(@code).results.each do |result| %>
+  <% if result.package != package %>
+    <% if package != nil %>
+      </ul>
+    <% end %>
+
+    <% package = result.package %>
+    <h4><%= package %></h4>
+    <ul class="nav nav-list">
+
+  <% else %>
+  <% end %>
+    <li><%= link_to result.file, code_path(result) %>
+
+<% end %>
+</ul>
+
+</div><!--/.well -->
+</div><!--/span-->
+</div><!--/row-->
+</div><!--/content-->
 </div>

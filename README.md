@@ -1,7 +1,13 @@
 # Bioconductor Code Search for Package Developers
 Full text search system for all of bioconductor devel source code on the web.
-The **alpha** version of the system is opened to public at
+The **beta** version of the system is opened to public at
 http://search.bioconductor.JP
+
+The site has some useful functions:
+- fast full text search
+- code highlighting
+- facet search by package name
+- "More Like this"
 
 Source codes of this system (without sources of each bioconductor package) are 
 licensed under a Artistic-2.0.
