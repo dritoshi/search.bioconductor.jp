@@ -15,7 +15,12 @@ class CodesController < ApplicationController
    else
       @search = []
     end
-    return @search
+#    return @search
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: @search.results }
+    end
   end
 
   # GET /codes/1

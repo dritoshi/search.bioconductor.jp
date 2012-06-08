@@ -1,6 +1,0 @@
-<%- model_class = Code.new.class -%>
-
-<%= form_tag codes_path, :method => :get do %>
-  <%= text_field_tag :query, params[:query], {:class => "input-xlarge", :placeholder => "Type something… (Example: IRanges)"} %>
-  <%= submit_tag "Search", :name => nil %>
-<% end %>
