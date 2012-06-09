@@ -1,4 +1,7 @@
 # Change Log
+## 2012/06/10 0.99.5
+* Keyword highlighting in index.html.erb
+
 ## 2012/06/08 0.99.4
 * Added "More Like This"
 

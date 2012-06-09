@@ -5,6 +5,7 @@ http://search.bioconductor.JP
 
 The site has some useful functions:
 - fast full text search
+- Keyword highlighting
 - code highlighting
 - facet search by package name
 - "More Like this"
