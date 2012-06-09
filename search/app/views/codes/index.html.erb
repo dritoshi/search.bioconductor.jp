@@ -34,7 +34,9 @@ Results: <%= @search.hits.total_entries %>
     </div>
     <div class="row">
       <% cache do %>
-        <%== Pygments.highlight(CGI.unescapeHTML(highlight.format {|word| word })) %>
+        <% highlighted_code = Pygments.highlight(highlight.format {|word| word }) %>
+        <% params['query'].split(/\s/).each { |word| highlighted_code.gsub!(/#{word}/i, "<span style=\"font-weight: bold\">#{word}</span>") } %>
+        <%== highlighted_code %>
       <% end %>
     </div>
   <% end %>
