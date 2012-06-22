@@ -1,4 +1,7 @@
 # Change Log
+## 2012/06/22 0.99.6
+Added new favicon.ico
+
 ## 2012/06/10 0.99.5
 * Keyword highlighting in index.html.erb
 * get search results in JSON
