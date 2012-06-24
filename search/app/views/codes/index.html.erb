@@ -1,62 +1,55 @@
 <%- model_class = Code.new.class -%>
 
-<p>
+<!-- form -->
 <%= form_tag codes_path, :method => :get do %>
   <%= text_field_tag :query, params[:query],  {:class => "input-xlarge", :placeholder => "Type something…"} %>
   <%= submit_tag "Search", :name => nil %>
 <% end %>  
 
-<div class="container">
-  <div class="content">
-    <div class="row">
-       <div class="span9">
+<div class="row-fluid">
+<div class="span9">
 
 <% if @search == [] %>
-  <div class="row">
   Results: 0
- </div>
 <% else %>
 
-<div class="row">
 Results: <%= @search.hits.total_entries %>
-</div>
 
 <p>
 <% @search.each_hit_with_result do |hit, code| %>
   <% hit.highlights.each do |highlight| %>
-    <div class="row">
+    <div class="page-header">
       <h3>
-        <%= link_to code.file, code_path(code) %> - <%= code.file_path %><br/>
+        <%= link_to code.file, code_path(code) %>
+	<small><%= code.file_path %></small>
       </h3>
+    </div><!-- page-header -->
         Package: <%= link_to code.package, "http://bioconductor.jp/packages/2.11/bioc/html/#{code.package}.html" %> -
         Version: <%= code.version %> -
         Language: <%= code.language %>
-    </div>
-    <div class="row">
       <% cache do %>
         <% highlighted_code = Pygments.highlight(highlight.format {|word| word }) %>
         <% params['query'].split(/\s/).each { |word| highlighted_code.gsub!(/#{word}/i, "<span style=\"font-weight: bold\">#{word}</span>") } %>
         <%== highlighted_code %>
       <% end %>
-    </div>
   <% end %>
 <% end %>
-
-
-        </div>
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <h3>Packages</h3>
-            <ul class="nav nav-list">
-              <% @search.facet(:package).rows.each do |facet| %>
-                <li><%= link_to "#{facet.value} (#{facet.count})", url_for(:query => params[:query], :package => facet.value) %></li>
-              <% end %>
-            </ul>
-           </div><!--/.well -->
-        </div><!--/span-->
-    </div><!--/row-->
-  </div><!--/content-->
-</div>
-
 <%= paginate @search.hits %>
+</div> <!-- span9 -->
+
+<!-- Start of Sidebar -->
+<div class="span3">
+  <div class="well sidebar-nav">
+    <h3>Packages</h3>
+    <ul class="nav nav-list">
+      <% @search.facet(:package).rows.each do |facet| %>
+        <li><%= link_to "#{facet.value} (#{facet.count})", url_for(:query => params[:query], :package => facet.value) %></li>
+      <% end %>
+    </ul>
+ </div><!--/.well -->
+</div><!--/span-->
+<!-- End of Sidebar -->
 <% end %>
+
+</div><!-- span12 -->
+</div><!-- row-fluid -->

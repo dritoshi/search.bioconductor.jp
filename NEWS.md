@@ -1,4 +1,8 @@
 # Change Log
+## 2012/06/22 0.99.7
+Added public/images and moved public/images/favicon.ico
+Sophisticated CSS file and page layout
+
 ## 2012/06/22 0.99.6
 Added new favicon.ico
 
